@@ -8,8 +8,11 @@ import jakarta.validation.constraints.Positive;
 public record ProductDTO (
         @NotBlank
         String name,
-        @Positive @NotNull @NotBlank
+        @Positive
+        @NotNull
         Double price,
-        @Positive @NotNull @Min(1)
+        @Positive
+        @NotNull
+        @Min(1)
         Integer quantity
 ) { }
