@@ -1,4 +1,4 @@
-package com.deadlock.fastjk.model.enums;
+package com.deadlock.fastjk.core.model.enums;
 
 public enum PaymentMethod {
     CREDIT_CARD,
