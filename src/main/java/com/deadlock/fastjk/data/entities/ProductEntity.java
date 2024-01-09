@@ -3,10 +3,12 @@ package com.deadlock.fastjk.data.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
 @Entity(name = "product")
+@Builder
 public class ProductEntity {
     @Id
     private Long id;
