@@ -1,6 +1,6 @@
 package com.deadlock.fastjk.data.entities;
 
-import com.deadlock.fastjk.model.enums.PaymentMethod;
+import com.deadlock.fastjk.core.model.enums.PaymentMethod;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

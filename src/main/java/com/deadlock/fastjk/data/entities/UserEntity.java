@@ -1,6 +1,6 @@
 package com.deadlock.fastjk.data.entities;
 
-import com.deadlock.fastjk.model.enums.TypeAccess;
+import com.deadlock.fastjk.core.model.enums.TypeAccess;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
