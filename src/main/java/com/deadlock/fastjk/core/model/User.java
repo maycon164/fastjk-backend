@@ -1,4 +1,10 @@
 package com.deadlock.fastjk.core.model;
 
-public record User() {
+import com.deadlock.fastjk.core.model.enums.TypeAccess;
+
+public record User(
+        String name,
+        String email,
+        TypeAccess typeAccess
+) {
 }
