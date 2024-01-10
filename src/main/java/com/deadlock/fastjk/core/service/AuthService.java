@@ -20,6 +20,8 @@ public class AuthService {
     public String login(LoginDTO loginDTO) {
         GoogleUserDTO googleUserDTO = provider.authenticateGoogleInformation(loginDTO.token());
 
+        System.out.println(googleUserDTO);
+
         UserEntity user = userRepository.findByEmail(googleUserDTO .email())
                 .orElseThrow(UserNotFound::new);
 

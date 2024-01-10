@@ -7,3 +7,7 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+
+app:
+  client-id: ${GOOGLE_ID}
+  secret: ${SECRET}

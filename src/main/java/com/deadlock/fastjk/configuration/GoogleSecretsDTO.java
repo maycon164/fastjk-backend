@@ -1,6 +1,7 @@
 package com.deadlock.fastjk.configuration;
 
-public class GoogleSecretsDTO {
-    private String GOOGLE_ID = "";
-    private String SECRET = "";
-}
+public record GoogleSecretsDTO (
+    String CLIENT_ID,
+    String SECRET
+){ }
+
