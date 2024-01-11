@@ -1,5 +1,6 @@
 package com.deadlock.fastjk.controller;
 
+import com.deadlock.fastjk.core.dto.AuthResponseDTO;
 import com.deadlock.fastjk.core.dto.LoginDTO;
 import com.deadlock.fastjk.core.service.AuthService;
 import jakarta.validation.Valid;
@@ -18,10 +19,8 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginDTO loginDTO){
-        authService.login(loginDTO);
-
-        return ResponseEntity.ok("Access Token being returned");
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid LoginDTO loginDTO){
+        return ResponseEntity.ok(authService.login(loginDTO));
     }
 
 }

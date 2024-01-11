@@ -1,5 +1,6 @@
 package com.deadlock.fastjk.core.service;
 
+import com.deadlock.fastjk.core.dto.AuthResponseDTO;
 import com.deadlock.fastjk.core.dto.LoginDTO;
 import com.deadlock.fastjk.core.model.User;
 import com.deadlock.fastjk.data.auth.GoogleProvider;
@@ -10,25 +11,35 @@ import com.deadlock.fastjk.exceptions.UserNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static java.util.Objects.isNull;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
     private final GoogleProvider provider;
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
-    public String login(LoginDTO loginDTO) {
+    public AuthResponseDTO login(LoginDTO loginDTO) {
         GoogleUserDTO googleUserDTO = provider.authenticateGoogleInformation(loginDTO.token());
 
-        System.out.println(googleUserDTO);
-
-        UserEntity user = userRepository.findByEmail(googleUserDTO .email())
+        UserEntity userEntity = userRepository.findByEmail(googleUserDTO .email())
                 .orElseThrow(UserNotFound::new);
 
-        return "jwt token";
+        User user = buildUser(googleUserDTO, userEntity);
+
+        String jwtToken = jwtService.generateToken(userEntity);
+
+        return new AuthResponseDTO(user, jwtToken);
     }
 
-    private User buildUser(){
-        throw new RuntimeException("not implemented");
+    private User buildUser(GoogleUserDTO googleUserDTO, UserEntity userEntity){
+        return User.builder()
+                .name(isNull(userEntity.getName()) ? googleUserDTO.name() : userEntity.getName())
+                .email(userEntity.getEmail())
+                .photo(googleUserDTO.picture())
+                .typeAccess(userEntity.getTypeAccess())
+                .build();
     }
 }
