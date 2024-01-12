@@ -1,11 +1,14 @@
 package com.deadlock.fastjk.controller;
 
 import com.deadlock.fastjk.core.dto.ProductDTO;
+import com.deadlock.fastjk.core.model.Product;
 import com.deadlock.fastjk.core.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -15,9 +18,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<String> getProducts() {
-        System.out.println(productService);
-        return ResponseEntity.ok("i will get all your products .... soon");
+    public ResponseEntity<List<Product>> getProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @PostMapping

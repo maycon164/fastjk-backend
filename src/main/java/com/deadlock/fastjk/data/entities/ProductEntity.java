@@ -4,11 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity(name = "product")
 @Builder
+@Data
 public class ProductEntity {
     @Id
     private Long id;

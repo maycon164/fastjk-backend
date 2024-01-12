@@ -1,12 +1,11 @@
 package com.deadlock.fastjk.data.entities;
 
 import com.deadlock.fastjk.core.model.enums.TypeAccess;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity(name = "users")
+@Data
 public class UserEntity {
 
     @Id
@@ -16,6 +15,7 @@ public class UserEntity {
     @Transient
     private String photo;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_access")
     private TypeAccess typeAccess;
 
