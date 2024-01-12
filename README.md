@@ -1,6 +1,6 @@
 ### README
 
 
-### DIAGRAMA ENTITDADE RELACIONAMENTO (DER)
+### DIAGRAMA ENTITDADE RELACIONAMENTO (DER) version-v2
 
-<image src="./diagrams/der.png"/>
+<image src="./diagrams/der-v2.png"/>
