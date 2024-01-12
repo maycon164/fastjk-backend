@@ -24,12 +24,25 @@ CREATE TABLE location (
 
 CREATE TABLE sale (
     id SERIAL PRIMARY KEY,
-    product_id INTEGER,
     seller_id INTEGER,
     location_id INTEGER,
-    quantity INTEGER,
     discount NUMERIC(5,2),
     total NUMERIC(5,2),
     payment_method TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+
+    FOREIGN KEY (seller_id) REFERENCES users(id),
+    FOREIGN KEY (location_id) REFERENCES location(id)
+);
+
+CREATE TABLE sale_item(
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER,
+    quantity INTEGER,
+    discount NUMERIC(5,2),
+    total NUMERIC(5,2),
+    sale_id INTEGER,
+
+    FOREIGN KEY (sale_id) REFERENCES sale(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
 );
