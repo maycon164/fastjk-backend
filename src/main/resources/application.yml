@@ -3,6 +3,9 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+  mvc:
+    validation:
+      enabled: true
   jpa:
     hibernate:
       ddl-auto: none
