@@ -19,7 +19,7 @@ public class AuthService {
 
     private final GoogleProvider provider;
     private final UserRepository userRepository;
-    private final JwtService jwtService;
+    private final TokenService jwtService;
 
     public AuthResponseDTO login(LoginDTO loginDTO) {
         GoogleUserDTO googleUserDTO = provider.authenticateGoogleInformation(loginDTO.token());
