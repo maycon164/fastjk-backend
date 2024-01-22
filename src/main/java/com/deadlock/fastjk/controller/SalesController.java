@@ -1,6 +1,7 @@
 package com.deadlock.fastjk.controller;
 
 import com.deadlock.fastjk.core.dto.SaleDTO;
+import com.deadlock.fastjk.core.model.User;
 import com.deadlock.fastjk.core.service.SaleService;
 import com.deadlock.fastjk.data.entities.SaleEntity;
 import jakarta.validation.Valid;
@@ -18,8 +19,8 @@ public class SalesController {
     private final SaleService salesService;
 
     @PostMapping
-    public ResponseEntity<String> registerSale(@RequestBody @Valid SaleDTO saleDTO) {
-        return ResponseEntity.ok(salesService.registerNewSale(saleDTO));
+    public ResponseEntity<SaleEntity> registerSale(@RequestBody @Valid SaleDTO saleDTO) {
+        return ResponseEntity.ok(salesService.registerNewSale(User.builder().build(), saleDTO));
     }
 
     @GetMapping
