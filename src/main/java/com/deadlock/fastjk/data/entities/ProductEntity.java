@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Entity(name = "product")
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductEntity {
     @Id
     private Long id;
