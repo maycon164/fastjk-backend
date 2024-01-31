@@ -7,6 +7,7 @@ import com.deadlock.fastjk.data.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,7 +20,10 @@ public class ProductService {
         ProductEntity productEntity = ProductEntity.builder()
                 .name(productDTO.name())
                 .price(productDTO.price())
+                .description(productDTO.description())
+                .barCode(productDTO.barCode())
                 .quantity(productDTO.quantity())
+                .createdAt(LocalDate.now())
                 .build();
 
         productRepository.save(productEntity);
@@ -34,9 +38,11 @@ public class ProductService {
 
     private Product toProductModel(ProductEntity productEntity) {
         return Product.builder()
+                .id(productEntity.getId())
                 .name(productEntity.getName())
                 .description(productEntity.getDescription())
                 .price(productEntity.getPrice())
+                .quantity(productEntity.getQuantity())
                 .createdAt(productEntity.getCreatedAt())
                 .build();
     }

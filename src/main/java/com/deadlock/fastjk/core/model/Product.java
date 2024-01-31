@@ -6,8 +6,10 @@ import java.time.LocalDate;
 
 @Builder
 public record Product (
-    String name,
-    String description,
-    Double price,
-    LocalDate createdAt
+        Long id,
+        String name,
+        String description,
+        Double price,
+        Integer quantity,
+        LocalDate createdAt
 ){}

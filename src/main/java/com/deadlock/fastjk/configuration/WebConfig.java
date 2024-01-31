@@ -10,7 +10,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
-@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     private Environment env;
@@ -18,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5500")
+                .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept")
                 .allowCredentials(true);

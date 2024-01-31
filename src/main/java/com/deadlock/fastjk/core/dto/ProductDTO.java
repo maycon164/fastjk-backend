@@ -11,6 +11,8 @@ public record ProductDTO (
         @Positive
         @NotNull
         Double price,
+        String description,
+        String barCode,
         @Positive
         @NotNull
         @Min(1)
