@@ -26,10 +26,10 @@ public class SaleService {
 
     public SaleEntity registerNewSale(User user, SaleDTO saleDTO) {
 
-        LocationEntity location = locationRepository.findById(user.location().locationId())
+        LocationEntity location = locationRepository.findById(1L)
                 .orElseThrow(() -> new NotFoundException("location not found"));
 
-        UserEntity seller = userRepository.findById(user.id())
+        UserEntity seller = userRepository.findById(1L)
                 .orElseThrow(() -> new NotFoundException("user not found"));
 
         List<SaleItemEntity> items = saleDTO.items().stream().map(this::getSaleItemEntity).toList();
@@ -41,6 +41,8 @@ public class SaleService {
                 .seller(seller)
                 .paymentMethod(saleDTO.paymentMethod())
                 .items(items)
+                .moneyReceived(saleDTO.moneyReceived())
+                .change(saleDTO.change())
                 .createdAt(LocalDate.now())
                 .discount(saleDTO.discount())
                 .total(total)
@@ -57,6 +59,8 @@ public class SaleService {
 
         double total = product.getPrice() * saleItemDTO.quantity() - saleItemDTO.discount();
 
+        updateQuantityOfProduct(product, saleItemDTO.quantity());
+
         return SaleItemEntity.builder()
                 .product(product)
                 .quantity(saleItemDTO.quantity())
@@ -64,6 +68,11 @@ public class SaleService {
                 .build();
     }
 
+    private void updateQuantityOfProduct(ProductEntity productEntity, Integer quantity) {
+        Integer availableQuantity = productEntity.getQuantity();
+        productEntity.setQuantity(availableQuantity - quantity);
+        productRepository.save(productEntity);
+    }
 
 
     public List<SaleEntity> getAllSales() {
