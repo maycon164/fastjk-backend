@@ -35,7 +35,6 @@ public class ProductService {
         return productRepository.findAll().stream().map(this::toProductModel).toList();
     }
 
-
     private Product toProductModel(ProductEntity productEntity) {
         return Product.builder()
                 .id(productEntity.getId())
