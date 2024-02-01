@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SaleEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private UserEntity seller;
@@ -26,7 +27,8 @@ public class SaleEntity {
     private Long locationId;
     private Double discount;
     private Double total;
-
+    private Double moneyReceived;
+    private Double change;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
     private LocalDate createdAt;

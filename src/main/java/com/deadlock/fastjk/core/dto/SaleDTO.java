@@ -9,6 +9,8 @@ public record SaleDTO (
     Long locationId,
     PaymentMethod paymentMethod,
     List<SaleItemDTO> items,
+    Double moneyReceived,
+    Double change,
     Double discount,
     Double total
 ) {}

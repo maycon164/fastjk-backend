@@ -26,11 +26,12 @@ CREATE TABLE sale (
     id SERIAL PRIMARY KEY,
     seller_id INTEGER,
     location_id INTEGER,
-    discount NUMERIC(5,2),
+    discount NUMERIC(10,2),
     total NUMERIC(10,2),
     payment_method TEXT,
+    money_received numeric(10, 2),
+    change numeric(10, 2),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-
     FOREIGN KEY (seller_id) REFERENCES users(id),
     FOREIGN KEY (location_id) REFERENCES location(id)
 );
