@@ -25,4 +25,4 @@ VALUES (1, 1, 0.10, 100.00, 'MONEY');
 select * from sale_item;
 
 INSERT INTO sale_item (product_id, quantity, discount, total, sale_id)
-VALUES (2, 5, 0.05, 90.00, 3);
+VALUES (2, 5, 0.05, 90.00, 1);

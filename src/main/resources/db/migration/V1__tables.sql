@@ -11,7 +11,7 @@ CREATE TABLE product (
     name VARCHAR(50),
     description VARCHAR(50),
     quantity INTEGER,
-    price NUMERIC(5,2),
+    price NUMERIC(10,2),
     bar_code VARCHAR(100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -27,7 +27,7 @@ CREATE TABLE sale (
     seller_id INTEGER,
     location_id INTEGER,
     discount NUMERIC(5,2),
-    total NUMERIC(5,2),
+    total NUMERIC(10,2),
     payment_method TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
 
@@ -39,8 +39,8 @@ CREATE TABLE sale_item(
     id SERIAL PRIMARY KEY,
     product_id INTEGER,
     quantity INTEGER,
-    discount NUMERIC(5,2),
-    total NUMERIC(5,2),
+    discount NUMERIC(10,2),
+    total NUMERIC(10,2),
     sale_id INTEGER,
 
     FOREIGN KEY (sale_id) REFERENCES sale(id),

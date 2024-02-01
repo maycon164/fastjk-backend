@@ -11,5 +11,6 @@ public record Product (
         String description,
         Double price,
         Integer quantity,
+        String barCode,
         LocalDate createdAt
 ){}

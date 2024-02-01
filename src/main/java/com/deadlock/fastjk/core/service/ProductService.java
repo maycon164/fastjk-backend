@@ -4,11 +4,14 @@ import com.deadlock.fastjk.core.dto.ProductDTO;
 import com.deadlock.fastjk.core.model.Product;
 import com.deadlock.fastjk.data.entities.ProductEntity;
 import com.deadlock.fastjk.data.repository.ProductRepository;
+import com.deadlock.fastjk.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +38,18 @@ public class ProductService {
         return productRepository.findAll().stream().map(this::toProductModel).toList();
     }
 
+    public Product getProductByCodeOrById(String barCode, Long productId){
+        ProductEntity productEntity;
+
+        if(!isNull(barCode)) {
+            productEntity = productRepository.findByBarCode(barCode).orElseThrow(() -> new NotFoundException("product not found!"));
+        } else {
+            productEntity =  productRepository.findById(productId).orElseThrow(() -> new NotFoundException("product not found!"));
+        }
+
+        return toProductModel(productEntity);
+    }
+
     private Product toProductModel(ProductEntity productEntity) {
         return Product.builder()
                 .id(productEntity.getId())
@@ -42,7 +57,9 @@ public class ProductService {
                 .description(productEntity.getDescription())
                 .price(productEntity.getPrice())
                 .quantity(productEntity.getQuantity())
+                .barCode(productEntity.getBarCode())
                 .createdAt(productEntity.getCreatedAt())
                 .build();
     }
+
 }

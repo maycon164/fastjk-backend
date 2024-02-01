@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -25,5 +27,15 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<String> addProduct(@RequestBody @Valid ProductDTO productDTO) {
         return ResponseEntity.ok(productService.addNewProduct(productDTO));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Product> getProductByCodeOrId (@RequestParam(required = false) String barCode, @RequestParam(required = false) Long productId) {
+
+        if(isNull(barCode) && isNull(productId)){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(productService.getProductByCodeOrById(barCode, productId));
     }
 }
