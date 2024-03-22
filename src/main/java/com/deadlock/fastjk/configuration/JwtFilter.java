@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static java.util.Objects.isNull;
 
-@Component
+
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
