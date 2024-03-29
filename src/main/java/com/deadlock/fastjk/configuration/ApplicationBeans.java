@@ -16,13 +16,15 @@ public class ApplicationBeans {
     Environment env;
 
 
+    @Bean
+    @Primary
     public DataSource dataSource() {
 
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.sqlite.JDBC");
-        dataSource.setUrl("jdbc:sqlite:src/main/resources/fastjk.db");
-        dataSource.setUsername("");
-        dataSource.setPassword("");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/fastjk");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("9090");
         return dataSource;
     }
 }

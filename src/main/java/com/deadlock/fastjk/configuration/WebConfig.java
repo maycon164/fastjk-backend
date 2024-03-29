@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public GoogleSecretsDTO googleSecretsDTO(@Value("${app.client-id}") String CLIENT_ID, @Value("${app.secret}") String SECRET ) {
-        return new GoogleSecretsDTO(CLIENT_ID, SECRET);
+    public GoogleSecretsDTO googleSecretsDTO() {
+        return new GoogleSecretsDTO("466974422865-03amgt4sl7aiql2puff9ihlu671ev16r.apps.googleusercontent.com", "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");
     }
 }
