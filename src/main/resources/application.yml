@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: ${PROFILE:dev}
   datasource:
     driverClassName: org.postgresql.Driver
     url: ${DB_URL:jdbc:postgresql://localhost:5432/fastjk}
@@ -21,4 +23,5 @@ server:
 
 app:
   client-id: ${GOOGLE_ID}
-  secret: ${SECRET}
+  client-secret: ${SECRET}
+  url-frontend: ${URL_FRONTEND}
