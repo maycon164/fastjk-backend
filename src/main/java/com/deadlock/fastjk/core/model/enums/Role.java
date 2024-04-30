@@ -1,6 +1,6 @@
 package com.deadlock.fastjk.core.model.enums;
 
-public enum TypeAccess {
+public enum Role {
     ADMIN,
     SELLER
 }

@@ -1,6 +1,6 @@
 package com.deadlock.fastjk.data.entities;
 
-import com.deadlock.fastjk.core.model.enums.TypeAccess;
+import com.deadlock.fastjk.core.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,5 +23,5 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_access")
-    private TypeAccess typeAccess;
+    private Role typeAccess;
 }

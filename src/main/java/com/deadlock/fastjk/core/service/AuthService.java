@@ -39,7 +39,7 @@ public class AuthService {
                 .name(isNull(userEntity.getName()) ? googleUserDTO.name() : userEntity.getName())
                 .email(userEntity.getEmail())
                 .photo(googleUserDTO.picture())
-                .typeAccess(userEntity.getTypeAccess())
+                .role(userEntity.getTypeAccess())
                 .build();
     }
 }
