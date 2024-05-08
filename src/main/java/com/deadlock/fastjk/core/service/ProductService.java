@@ -31,23 +31,32 @@ public class ProductService {
 
         productRepository.save(productEntity);
 
-        return "Service will handle product";
+        return "Product created successfully";
+    }
+
+    public String updateProduct(Long productId, ProductDTO productDTO){
+        ProductEntity productEntity = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("product not found!"));
+        productEntity.setName(productDTO.name());
+        productEntity.setPrice(productDTO.price());
+        productEntity.setDescription(productDTO.description());
+        productEntity.setBarCode(productDTO.barCode());
+        productEntity.setQuantity(productDTO.quantity());
+        productRepository.save(productEntity);
+        return "Product update successfully";
     }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll().stream().map(this::toProductModel).toList();
     }
 
-    public Product getProductByCodeOrById(String barCode, Long productId){
-        ProductEntity productEntity;
-
-        if(!isNull(barCode)) {
-            productEntity = productRepository.findByBarCode(barCode).orElseThrow(() -> new NotFoundException("product not found!"));
-        } else {
-            productEntity =  productRepository.findById(productId).orElseThrow(() -> new NotFoundException("product not found!"));
-        }
-
+    public Product getProductByCode(String barCode){
+        ProductEntity productEntity = productRepository.findByBarCode(barCode)
+                .orElseThrow(() -> new NotFoundException("product not found!"));
         return toProductModel(productEntity);
+    }
+
+    public void deleteProductById(Long productId) {
+        productRepository.deleteById(productId);
     }
 
     private Product toProductModel(ProductEntity productEntity) {
