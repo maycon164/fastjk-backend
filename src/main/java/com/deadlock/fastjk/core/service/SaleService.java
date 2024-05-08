@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -75,7 +76,8 @@ public class SaleService {
     }
 
 
-    public List<SaleEntity> getAllSales() {
-        return saleRepository.findAll();
+    public List<SaleEntity> getSalesByDate(String date) {
+        LocalDate dateFormatted = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return saleRepository.findSalesByCreatedAt(dateFormatted);
     }
 }

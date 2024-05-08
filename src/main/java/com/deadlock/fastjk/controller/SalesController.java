@@ -24,7 +24,7 @@ public class SalesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SaleEntity>> getAllSales() {
-        return ResponseEntity.ok(salesService.getAllSales());
+    public ResponseEntity<List<SaleEntity>> getAllSales(@RequestParam(name="date") String date) {
+        return ResponseEntity.ok(salesService.getSalesByDate(date));
     }
 }
