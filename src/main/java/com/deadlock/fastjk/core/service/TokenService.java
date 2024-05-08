@@ -9,6 +9,9 @@ import com.deadlock.fastjk.core.model.enums.Role;
 import com.deadlock.fastjk.data.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 @Service
 public class TokenService {
 
@@ -23,6 +26,7 @@ public class TokenService {
                 .withClaim(CLAIM_ID, userEntity.getId())
                 .withClaim(CLAIM_EMAIL, userEntity.getEmail())
                 .withClaim(CLAIM_ACCESS, userEntity.getTypeAccess().toString())
+                .withExpiresAt(LocalDateTime.now().plusDays(2).toInstant(ZoneOffset.of("-03:00")))
                 .sign(algorithm);
 
         return token;
