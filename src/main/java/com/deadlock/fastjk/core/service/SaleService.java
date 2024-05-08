@@ -3,17 +3,16 @@ package com.deadlock.fastjk.core.service;
 import com.deadlock.fastjk.core.dto.SaleDTO;
 import com.deadlock.fastjk.core.dto.SaleItemDTO;
 import com.deadlock.fastjk.core.model.User;
+import com.deadlock.fastjk.core.model.enums.PaymentMethod;
 import com.deadlock.fastjk.data.entities.*;
-import com.deadlock.fastjk.data.repository.LocationRepository;
-import com.deadlock.fastjk.data.repository.ProductRepository;
-import com.deadlock.fastjk.data.repository.SaleRepository;
-import com.deadlock.fastjk.data.repository.UserRepository;
+import com.deadlock.fastjk.data.repository.*;
 import com.deadlock.fastjk.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +23,7 @@ public class SaleService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
+    private final SaleItemRepository saleItemRepository;
 
     public SaleEntity registerNewSale(User user, SaleDTO saleDTO) {
 
@@ -37,13 +37,25 @@ public class SaleService {
 
         double total = items.stream().mapToDouble(SaleItemEntity::getTotal).sum();
 
+        Double moneyReceived = saleDTO.moneyReceived();
+        Double change = saleDTO.change();
+
+        List<PaymentMethod> paymentMethodList = List.of(PaymentMethod.PIX, PaymentMethod.CREDIT_CARD, PaymentMethod.DEBIT_CARD);
+
+        if(paymentMethodList.contains(saleDTO.paymentMethod())) {
+            moneyReceived = total;
+            change = 0d;
+        }
+
+        saleItemRepository.saveAll(items);
+
         SaleEntity sale =  SaleEntity.builder()
                 .locationId(location.getId())
                 .seller(seller)
                 .paymentMethod(saleDTO.paymentMethod())
                 .items(items)
-                .moneyReceived(saleDTO.moneyReceived())
-                .change(saleDTO.change())
+                .moneyReceived(moneyReceived)
+                .change(change)
                 .createdAt(LocalDate.now())
                 .discount(saleDTO.discount())
                 .total(total)
